@@ -15,4 +15,8 @@ data class LocationAddress(
     var address:AddressName,
     @SerializedName("road_address")
     var road_address:RoadAddress
-    )
+    ){
+    override fun toString(): String {
+        return "address_name : $address_name"
+    }
+}

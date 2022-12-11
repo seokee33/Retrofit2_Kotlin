@@ -1,6 +1,7 @@
 package com.example.retrofit2_kotlin.retrofit
 
 import com.example.retrofit2_kotlin.API
+import com.example.retrofit2_kotlin.dto.LocationAddress
 import com.google.gson.JsonElement
 import retrofit2.Call
 import retrofit2.http.*

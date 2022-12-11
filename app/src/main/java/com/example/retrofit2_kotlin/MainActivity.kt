@@ -7,7 +7,12 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.example.retrofit2_kotlin.dto.GetMetaData
+import com.example.retrofit2_kotlin.dto.LocationAddress
+import com.example.retrofit2_kotlin.dto.MapAddressApi
 import com.example.retrofit2_kotlin.retrofit.RetrofitManager
+import com.google.gson.Gson
+import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
     lateinit var etAddress: EditText
@@ -35,14 +40,17 @@ class MainActivity : AppCompatActivity() {
 
         btnGet.setOnClickListener {
             RetrofitManager.instance.searchAddress(etAddress.text.toString(), completion = {
-                responseState, reponseBody ->
+                responseState, responseBody ->
                     when(responseState){
                         RESPONSE_STATE.OKAY ->{
-                            Log.d("MainActivity", "API 호춣 성공 : $reponseBody")
+                            var gson = Gson()
+                            val location : MapAddressApi? = gson.fromJson(responseBody,MapAddressApi::class.java)
+                            Log.d("MainActivity", "API 호춣 성공 : $location")
+                            Log.d("MainActivity", "getDAta!!!!!!!!!!!!!!!!! : ${location.toString()}")
                         }
                         RESPONSE_STATE.FAIL ->{
                             Toast.makeText(this,"API 호출 Error",Toast.LENGTH_SHORT).show()
-                            Log.d("MainActivity", "API 호출 Error : $reponseBody")
+                            Log.d("MainActivity", "API 호출 Error : $responseBody")
                         }
                     }
             })

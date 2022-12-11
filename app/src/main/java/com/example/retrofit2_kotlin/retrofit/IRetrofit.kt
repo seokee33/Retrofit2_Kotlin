@@ -1,18 +1,24 @@
 package com.example.retrofit2_kotlin.retrofit
 
+import com.example.retrofit2_kotlin.API
 import com.google.gson.JsonElement
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface IRetrofit {
+    @Headers("Authorization:"+API.CLIENT_ID)
+    @GET(API.SEARCH_ADDRESS)
+    fun searchAddress(@Query("query") query:String) : Call<JsonElement>
 
-    @GET("/")
-    fun searchUsers() : Call<JsonElement>
+    @Headers("Authorization:"+API.CLIENT_ID)
+    @GET(API.SEARCH_COORD2ADDRESS)
+    fun searchCoord2Address(@Query("query") query:String) : Call<JsonElement>
 
-    @POST("/")
-    fun addUser(@Body() addData: String ) : Call<JsonElement>
+    @Headers("Authorization:"+API.CLIENT_ID)
+    @GET(API.SEARCH_TRANSCOORD)
+    fun searchTranscoord(@Query("query") query:String) : Call<JsonElement>
 
-
+    @Headers("Authorization:"+API.CLIENT_ID)
+    @GET(API.SEARCH_COORD2REGIONCODE)
+    fun searchCoord2Regioncode(@Query("query") query:String) : Call<JsonElement>
 }
